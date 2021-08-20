@@ -62,24 +62,46 @@ function Sidebar() {
         />
       </SidebarBox>
       <SidebarBox title="Tags">
-        <ul>
-          <li>Tag 1</li>
-          <li>Tag 2</li>
-          <li>Tag 3</li>
-          <li>Tag 4</li>
-          <li>Tag 1</li>
-          <li>Tag 2</li>
-          <li>Tag 3</li>
-          <li>Tag 4</li>
-          <li>Tag 1</li>
-          <li>Tag 2</li>
-          <li>Tag 3</li>
-          <li>Tag 4</li>
-          <li>Tag 1</li>
-          <li>Tag 2</li>
-          <li>Tag 3</li>
-          <li>Tag 4</li>
-        </ul>
+        <Checkbox
+          htmlFor="Tag1"
+          labelText="Tag 1"
+          value="tag1"
+          handleCheckboxChange={handleChange}
+          isSelected={false}
+          isDisabled={false}
+        />
+        <Checkbox
+          htmlFor="Tag2"
+          labelText="Tag 2"
+          value="tag2"
+          handleCheckboxChange={handleChange}
+          isSelected={false}
+          isDisabled={false}
+        />
+        <Checkbox
+          htmlFor="Tag3"
+          labelText="Tag 3"
+          value="tag3"
+          handleCheckboxChange={handleChange}
+          isSelected={false}
+          isDisabled={false}
+        />
+        <Checkbox
+          htmlFor="Tag4"
+          labelText="Tag 4"
+          value="tag4"
+          handleCheckboxChange={handleChange}
+          isSelected={false}
+          isDisabled={false}
+        />
+        <Checkbox
+          htmlFor="Tag5"
+          labelText="Tag 5"
+          value="tag5"
+          handleCheckboxChange={handleChange}
+          isSelected={false}
+          isDisabled={false}
+        />
       </SidebarBox>
     </SidebarWrapper>
   );
