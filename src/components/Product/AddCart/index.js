@@ -9,6 +9,7 @@ const AddCart = styled.button`
   width: 100%;
   border-radius: 2px;
   margin-top: 8px;
+  cursor: pointer;
 `;
 
 export default AddCart;

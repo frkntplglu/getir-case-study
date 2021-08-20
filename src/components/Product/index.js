@@ -10,12 +10,15 @@ const ProductWrapper = styled.div`
 `;
 
 function Product({ productImage }) {
+  const addToCart = () => {
+    alert("added to basket");
+  };
   return (
     <ProductWrapper>
       <ProductImage src={productImage} />
       <ProductPrice>₺ 14,99</ProductPrice>
       <ProductTitle>Rustic Beach Mug</ProductTitle>
-      <AddCart>Add</AddCart>
+      <AddCart onClick={addToCart}>Add</AddCart>
     </ProductWrapper>
   );
 }

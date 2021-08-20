@@ -2,7 +2,7 @@ import { ThemeProvider } from "styled-components";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import MainContainer from "./components/MainContainer";
-import ProductsList from "./containers/ProductsList";
+import Home from "./pages/Home";
 import GlobalStyle from "./styles/globalStyles";
 import theme from "./styles/theme";
 
@@ -13,7 +13,7 @@ function App() {
       <div className="App">
         <Header />
         <MainContainer>
-          <ProductsList />
+          <Home />
         </MainContainer>
         <Footer />
       </div>
