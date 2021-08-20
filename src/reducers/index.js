@@ -4,9 +4,9 @@ import { companiesReducer } from "./companiesReducers";
 import { productsReducers } from "./productsReducers";
 
 const reducers = combineReducers({
-    products: productsReducers,
-    companies: companiesReducer,
-    cart: cartReducer
-})
+  products: productsReducers,
+  companies: companiesReducer,
+  cart: cartReducer,
+});
 
 export default reducers;

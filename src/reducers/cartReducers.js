@@ -1,5 +1,5 @@
-const cartReducer = (state = {items: [], totalPrice: 0}, action) => {
-    return state
-}
+const cartReducer = (state = { items: [], totalPrice: 0 }, action) => {
+  return state;
+};
 
-export {cartReducer}
+export { cartReducer };
