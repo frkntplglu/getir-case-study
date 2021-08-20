@@ -5,7 +5,9 @@ const GlobalStyle = createGlobalStyle`
     /*! formalize.css | MIT License | github.com/interacthings/formalize */html{box-sizing:border-box;text-rendering:optimizeLegibility}body{overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}a{text-decoration:none}img{vertical-align:middle}blockquote,dd,dl,fieldset,figure,form,h1,h2,h3,h4,h5,h6,menu,ol,p,pre,ul{margin:0}button,fieldset,iframe{border:0}button,fieldset,menu,ol,ul{padding:0}ol,ul{list-style:none}textarea{resize:vertical}table{width:100%;border-collapse:collapse;border-spacing:0}td{padding:0}
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
     body{
+        background-color:#FAFAFA;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size:14px;
     }
 `;
 
