@@ -4,8 +4,8 @@ import CartItemTitle from "./CartItemTitle";
 import CartItemPrice from "./CartItemPrice";
 
 const CartItemWrapper = styled.div`
-  padding-bottom: 21px;
-  margin-bottom: 21px;
+  padding-top: 18px;
+  padding-bottom: 18px;
   border-bottom: 1px solid #f4f4f4;
 `;
 

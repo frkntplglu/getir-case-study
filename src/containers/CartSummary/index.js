@@ -9,6 +9,7 @@ const CartSummaryWrapper = styled.div`
   border: 8px solid ${(props) => props.theme.colors.mainColor};
   border-radius: 2px;
   padding: 16px;
+  box-sizing: border-box;
 `;
 
 function CartSummary() {
@@ -17,7 +18,6 @@ function CartSummary() {
       <CartItem title="Example Product" price="₺14,99" />
       <CartItem title="New Product" price="₺26,99" />
       <CartItem title="Refurbished Product" price="₺19,99" />
-      <CartItem title="Last Product" price="₺104,99" />
     </CartSummaryWrapper>
   );
 }

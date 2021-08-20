@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import Product from "../../components/Product";
 
-const ProductListWrapper = styled.div``;
+const ProductListWrapper = styled.div`
+  width: 608px;
+  flex-shrink: 0;
+`;
 
 const ProductListTitle = styled.h2`
   font-size: 20px;
@@ -13,8 +16,8 @@ const ProductListTitle = styled.h2`
 const ProductListInnerWrapper = styled.div`
   background-color: #fff;
   border-radius: 2px;
+  box-shadow: 0px 4px 24px rgba(93, 62, 188, 0.04);
   display: flex;
-  width: 608px;
   padding: 19px 19px 0 19px;
   justify-content: space-between;
   flex-wrap: wrap;
