@@ -4,7 +4,8 @@ import CartItem from "../../components/CartItem";
 const CartSummaryWrapper = styled.div`
   margin-left: 16px;
   max-width: 100%;
-  width: 300px;
+  width: 296px;
+  flex-shrink: 0;
   border: 8px solid ${(props) => props.theme.colors.mainColor};
   border-radius: 2px;
   padding: 16px;
