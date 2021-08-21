@@ -12,6 +12,6 @@ export const getAllCompanies = () => async (dispatch) => {
     const { data } = await getirAPI.get("/companies");
     dispatch({ type: COMPANIES_FETCH_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: COMPANIES_FETCH_FAIL, payload: error });
+    dispatch({ type: COMPANIES_FETCH_FAIL, payload: error.message });
   }
 };

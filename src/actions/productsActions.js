@@ -15,7 +15,7 @@ export const getAllProducts = () => async (dispatch) => {
     const { data } = await getirAPI.get("/products?_page=1&_limit=16");
     dispatch({ type: PRODUCTS_FETCH_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: PRODUCTS_FETCH_FAIL, payload: error });
+    dispatch({ type: PRODUCTS_FETCH_FAIL, payload: error.message });
   }
 };
 

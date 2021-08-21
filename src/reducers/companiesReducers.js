@@ -11,7 +11,7 @@ const companiesReducer = (state = { loading: true, items: [] }, action) => {
     case COMPANIES_FETCH_SUCCESS:
       return { loading: false, items: action.payload };
     case COMPANIES_FETCH_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, items: [], error: action.payload };
     default:
       return state;
   }

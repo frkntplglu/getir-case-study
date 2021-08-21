@@ -11,7 +11,7 @@ export const tagsReducers = (state = { loading: true, items: [] }, action) => {
     case TAGS_FETCH_SUCCESS:
       return { loading: false, items: action.payload };
     case TAGS_FETCH_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, items: [], error: action.payload };
     default:
       return state;
   }

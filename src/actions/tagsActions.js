@@ -12,6 +12,6 @@ export const getAllTags = () => async (dispatch) => {
     const { data } = await getirAPI.get("/tags");
     dispatch({ type: TAGS_FETCH_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: TAGS_FETCH_FAIL, payload: error });
+    dispatch({ type: TAGS_FETCH_FAIL, payload: error.message });
   }
 };

@@ -4,6 +4,7 @@ import Product from "../../components/Product";
 import { getAllProducts } from "../../actions/productsActions";
 import { useDispatch, useSelector } from "react-redux";
 import SpinnerIcon from "../../components/Icons/Spinner";
+import Alert from "../../components/UI/Alert";
 import theme from "../../styles/theme";
 
 const ProductListWrapper = styled.div`
@@ -31,7 +32,7 @@ const ProductListInnerWrapper = styled.div`
 
 function ProductsList() {
   const dispatch = useDispatch();
-  const { loading, items } = useSelector((state) => state.productsList);
+  const { loading, items, error } = useSelector((state) => state.productsList);
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
@@ -39,6 +40,7 @@ function ProductsList() {
     <ProductListWrapper>
       <ProductListTitle>Products</ProductListTitle>
       <ProductListInnerWrapper>
+        {error ? <Alert type="error">{error}</Alert> : null}
         {loading ? (
           <SpinnerIcon width={64} height={64} fill={theme.colors.mainColor} />
         ) : (

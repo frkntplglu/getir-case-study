@@ -6,6 +6,7 @@ import { getAllTags } from "../../actions/tagsActions";
 import SpinnerIcon from "../../components/Icons/Spinner";
 import ScrollableContent from "../../components/ScrollableContent";
 import SidebarBox from "../../components/SidebarBox";
+import Alert from "../../components/UI/Alert";
 import Checkbox from "../../components/UI/Checkbox";
 import Radio from "../../components/UI/Radio";
 import theme from "../../styles/theme";
@@ -27,14 +28,16 @@ const SidebarWrapper = styled.aside`
 `;
 
 function Sidebar() {
-  const { loading: loadingCompanies, items: companies } = useSelector(
-    (state) => state.companiesList
-  );
-  const { loading: loadingTags, items: tags } = useSelector(
-    (state) => state.tagsList
-  );
-  console.log(tags);
-  console.log(companies);
+  const {
+    loading: loadingCompanies,
+    items: companies,
+    error: companiesError,
+  } = useSelector((state) => state.companiesList);
+  const {
+    loading: loadingTags,
+    items: tags,
+    error: tagsError,
+  } = useSelector((state) => state.tagsList);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,6 +64,7 @@ function Sidebar() {
       </SidebarBox>
       <SidebarBox title="Brands">
         <ScrollableContent>
+          {companiesError ? <Alert type="error">{companiesError}</Alert> : null}
           {loadingCompanies ? (
             <SpinnerIcon width={64} height={64} fill={theme.colors.mainColor} />
           ) : (
@@ -78,6 +82,7 @@ function Sidebar() {
       </SidebarBox>
       <SidebarBox title="Tags">
         <ScrollableContent>
+          {tagsError ? <Alert type="error">{companiesError}</Alert> : null}
           {loadingTags ? (
             <SpinnerIcon width={64} height={64} fill={theme.colors.mainColor} />
           ) : (
