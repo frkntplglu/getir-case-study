@@ -47,13 +47,13 @@ const CheckboxLabel = styled.span`
   }
 `;
 
-function Checkbox({ value, labelText, handleCheckboxChange, isDisabled }) {
+function Checkbox({ value, labelText, handleOnChange, isDisabled }) {
   return (
     <CheckboxInputWrapper>
       <CheckboxInput
         type="checkbox"
         value={value}
-        onChange={handleCheckboxChange}
+        onChange={handleOnChange}
         disabled={isDisabled}
       />
       <CheckboxLabel>{labelText}</CheckboxLabel>
@@ -61,11 +61,11 @@ function Checkbox({ value, labelText, handleCheckboxChange, isDisabled }) {
   );
 }
 
-export default Checkbox;
-
 Checkbox.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   labelText: PropTypes.string,
   handleCheckboxChange: PropTypes.func,
   isDisabled: PropTypes.bool,
 };
+
+export default Checkbox;

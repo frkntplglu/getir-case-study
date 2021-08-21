@@ -10,7 +10,6 @@ import {
 const cartReducer = (state = { items: [], totalPrice: 0 }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
-      console.log(state.spinner);
       const isExistInCart = state.items.find(
         (item) => item.slug === action.payload.slug
       )

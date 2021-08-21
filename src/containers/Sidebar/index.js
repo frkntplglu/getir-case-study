@@ -8,6 +8,7 @@ import ScrollableContent from "../../components/ScrollableContent";
 import SidebarBox from "../../components/SidebarBox";
 import Alert from "../../components/UI/Alert";
 import Checkbox from "../../components/UI/Checkbox";
+import Input from "../../components/UI/Input";
 import Radio from "../../components/UI/Radio";
 import theme from "../../styles/theme";
 
@@ -44,7 +45,7 @@ function Sidebar() {
     dispatch(getAllCompanies());
     dispatch(getAllTags());
   }, [dispatch]);
-
+  const handleInputChange = () => {};
   const handleChange = (e) => {
     console.log(e.target.value);
   };
@@ -63,6 +64,11 @@ function Sidebar() {
         ))}
       </SidebarBox>
       <SidebarBox title="Brands">
+        <Input
+          value=""
+          placeholder="Search brand"
+          handleOnChange={handleInputChange}
+        />
         <ScrollableContent>
           {companiesError ? <Alert type="error">{companiesError}</Alert> : null}
           {loadingCompanies ? (
@@ -73,7 +79,7 @@ function Sidebar() {
                 key={company.slug}
                 labelText={company.name}
                 value={company.slug}
-                handleCheckboxChange={handleChange}
+                handleOnChange={handleChange}
                 isDisabled={false}
               />
             ))
@@ -81,6 +87,11 @@ function Sidebar() {
         </ScrollableContent>
       </SidebarBox>
       <SidebarBox title="Tags">
+        <Input
+          value=""
+          placeholder="Search tag"
+          handleOnChange={handleInputChange}
+        />
         <ScrollableContent>
           {tagsError ? <Alert type="error">{companiesError}</Alert> : null}
           {loadingTags ? (
@@ -91,7 +102,7 @@ function Sidebar() {
                 key={tag}
                 labelText={tag}
                 value={tag}
-                handleCheckboxChange={handleChange}
+                handleOnChange={handleChange}
                 isDisabled={false}
               />
             ))

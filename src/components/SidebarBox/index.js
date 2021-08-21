@@ -11,10 +11,7 @@ function SidebarBox({ title, children }) {
   return (
     <SidebarBoxWrapper>
       <SidebarBoxTitle>{title}</SidebarBoxTitle>
-      <SidebarBoxContent>
-        <p>Buraya input</p>
-        {children}
-      </SidebarBoxContent>
+      <SidebarBoxContent>{children}</SidebarBoxContent>
     </SidebarBoxWrapper>
   );
 }

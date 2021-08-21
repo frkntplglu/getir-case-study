@@ -48,14 +48,14 @@ const RadioLabel = styled.span`
   }
 `;
 
-function Radio({ value, name, labelText, handleRadioChange, isDisabled }) {
+function Radio({ value, name, labelText, handleOnChange, isDisabled }) {
   return (
     <RadioInputWrapper>
       <RadioInput
         type="checkbox"
         value={value}
         name={name}
-        onChange={handleRadioChange}
+        onChange={handleOnChange}
         disabled={isDisabled}
       />
       <RadioLabel>{labelText}</RadioLabel>
@@ -63,11 +63,11 @@ function Radio({ value, name, labelText, handleRadioChange, isDisabled }) {
   );
 }
 
-export default Radio;
-
 Radio.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   labelText: PropTypes.string,
   handleRadioChange: PropTypes.func,
   isDisabled: PropTypes.bool,
 };
+
+export default Radio;
