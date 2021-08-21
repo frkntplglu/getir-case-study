@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "../../components/Product";
 import { getAllProducts } from "../../actions/productsActions";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SpinnerIcon from "../../components/Icons/Spinner";
 import Alert from "../../components/UI/Alert";
 import theme from "../../styles/theme";
+import Modal from "../../components/UI/Modal";
 
 const ProductListWrapper = styled.div`
   width: 608px;
@@ -31,14 +32,22 @@ const ProductListInnerWrapper = styled.div`
 `;
 
 function ProductsList() {
+  const [isShowModal, setIsShowModal] = useState(true);
   const dispatch = useDispatch();
   const { loading, items, error } = useSelector((state) => state.productsList);
+
+  const handleModalClose = () => {
+    setIsShowModal(!isShowModal);
+  };
+
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
+
   return (
     <ProductListWrapper>
       <ProductListTitle>Products</ProductListTitle>
+      <Modal onClose={handleModalClose} isShown={isShowModal} />
       <ProductListInnerWrapper>
         {error ? <Alert type="error">{error}</Alert> : null}
         {loading ? (
