@@ -1,4 +1,5 @@
-import axios from "axios";
+import getirAPI from "../services/getirAPI";
+
 import {
   PRODUCTS_FETCH,
   PRODUCTS_FETCH_SUCCESS,
@@ -8,19 +9,15 @@ import {
   SORT_PRODUCTS,
 } from "./types";
 
-export const getAllProducts =
-  (page = 1) =>
-  async (dispatch) => {
-    try {
-      dispatch({ type: PRODUCTS_FETCH, payload: [] });
-      const { data } = await axios.get(
-        "http://localhost:3001/products?_page=1&_limit=16"
-      );
-      dispatch({ type: PRODUCTS_FETCH_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({ type: PRODUCTS_FETCH_FAIL, payload: error });
-    }
-  };
+export const getAllProducts = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCTS_FETCH, payload: [] });
+    const { data } = await getirAPI.get("/products?_page=1&_limit=16");
+    dispatch({ type: PRODUCTS_FETCH_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: PRODUCTS_FETCH_FAIL, payload: error });
+  }
+};
 
 export const sortProducts =
   (sortType = "SORT_LOW_TO_HIGH") =>

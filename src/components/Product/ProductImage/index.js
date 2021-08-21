@@ -11,16 +11,17 @@ const ProductImageTag = styled.img`
   width: 100%;
 `;
 
-function ProductImage({ src }) {
+function ProductImage({ src, altDescription }) {
   return (
     <ProductImageWrapper>
-      <ProductImageTag src={src} />
+      <ProductImageTag src={src} alt={altDescription} />
     </ProductImageWrapper>
   );
 }
 
 ProductImage.propTypes = {
   src: PropTypes.string.isRequired,
+  altDescription: PropTypes.string.isRequired,
 };
 
 export default ProductImage;

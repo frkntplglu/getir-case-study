@@ -8,7 +8,7 @@ const LogoImage = styled.img``;
 function Logo() {
   return (
     <LogoWrapper>
-      <LogoImage src={logo} />
+      <LogoImage src={logo} alt="Getir Market Case" />
     </LogoWrapper>
   );
 }

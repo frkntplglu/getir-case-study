@@ -3,7 +3,6 @@ import styled from "styled-components";
 import CartItem from "../../components/CartItem";
 import CartTotalPrice from "../../components/CartTotalPrice";
 import SpinnerIcon from "../../components/Icons/Spinner";
-import ScrollableContent from "../../components/ScrollableContent";
 import theme from "../../styles/theme";
 
 const CartSummaryWrapper = styled.div`

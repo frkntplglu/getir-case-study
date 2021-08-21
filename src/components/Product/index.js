@@ -20,7 +20,7 @@ function Product({ data, productImage }) {
   };
   return (
     <ProductWrapper>
-      <ProductImage src={productImage} />
+      <ProductImage src={productImage} altDescription={data.description} />
       <ProductPrice>₺ {data.price}</ProductPrice>
       <ProductTitle>{data.name}</ProductTitle>
       <AddCart onClick={() => addToCart(data)}>Add</AddCart>
@@ -33,7 +33,7 @@ Product.propTypes = {
     tags: PropTypes.array,
     price: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    description: PropTypes.string,
+    description: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     added: PropTypes.number,
     manufacturer: PropTypes.string,
