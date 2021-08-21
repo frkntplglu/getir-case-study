@@ -42,7 +42,7 @@ function ProductsList() {
           <Product
             key={product.slug}
             data={product}
-            productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png"
+            productImage="https://cdn.shopify.com/s/files/1/0250/8541/1390/products/1041_Product_1024x1024@2x.jpg?v=1619075008"
           />
         ))}
       </ProductListInnerWrapper>

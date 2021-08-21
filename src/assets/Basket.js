@@ -1,4 +1,6 @@
-function BasketIcon(props) {
+import * as React from "react";
+
+function SvgBasket(props) {
   return (
     <svg
       width={24}
@@ -15,4 +17,4 @@ function BasketIcon(props) {
   );
 }
 
-export default BasketIcon;
+export default SvgBasket;

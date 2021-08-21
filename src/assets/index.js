@@ -1,0 +1,6 @@
+export { default as Basket } from './Basket'
+export { default as Check } from './Check'
+export { default as Logo } from './Logo'
+export { default as Radiocheck } from './Radiocheck'
+export { default as Spinner } from './Spinner'
+export { default as Trash } from './Trash'

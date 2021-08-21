@@ -1,5 +1,7 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import basket from "../../assets/basket.svg";
+import BasketIcon from "../../components/Icons/Basket";
+import SpinnerIcon from "../../components/Icons/Spinner";
 
 const CartHeaderWrapper = styled.div`
   background-color: #147594;
@@ -15,14 +17,18 @@ const CartHeaderWrapper = styled.div`
   right: 0;
 `;
 
-const CartHeaderImage = styled.img`
+const CartHeaderImage = styled.div`
   margin-right: 7px;
 `;
 
 function CartHeader() {
+  const { totalPrice, spinner } = useSelector((state) => state.cart);
   return (
     <CartHeaderWrapper>
-      <CartHeaderImage src={basket} />₺ 39,97
+      <CartHeaderImage>
+        <BasketIcon />
+      </CartHeaderImage>
+      {spinner ? <SpinnerIcon width="36" height="36" /> : "₺" + totalPrice}
     </CartHeaderWrapper>
   );
 }

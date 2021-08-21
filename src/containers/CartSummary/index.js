@@ -1,8 +1,10 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CartItem from "../../components/CartItem";
+import CartTotalPrice from "../../components/CartTotalPrice";
+import SpinnerIcon from "../../components/Icons/Spinner";
 import ScrollableContent from "../../components/ScrollableContent";
+import theme from "../../styles/theme";
 
 const CartSummaryWrapper = styled.div`
   margin-left: 16px;
@@ -11,13 +13,14 @@ const CartSummaryWrapper = styled.div`
   flex-shrink: 0;
   border: 8px solid ${(props) => props.theme.colors.mainColor};
   border-radius: 2px;
-  padding: 16px;
+  padding: 14px 16px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 `;
 
 function CartSummary() {
-  const { items, totalPrice } = useSelector((state) => state.cart);
-  useEffect(() => {});
+  const { items, totalPrice, spinner } = useSelector((state) => state.cart);
   return (
     <CartSummaryWrapper>
       <ScrollableContent maxHeight={225}>
@@ -26,12 +29,20 @@ function CartSummary() {
           : items.map((item) => (
               <CartItem
                 key={item.slug}
+                slug={item.slug}
                 title={item.name}
                 price={item.price}
                 qty={item.qty}
               />
             ))}
       </ScrollableContent>
+      <CartTotalPrice>
+        {spinner ? (
+          <SpinnerIcon width="36" height="36" fill={theme.colors.mainColor} />
+        ) : (
+          "₺" + totalPrice
+        )}
+      </CartTotalPrice>
     </CartSummaryWrapper>
   );
 }
