@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const ProductImageWrapper = styled.div`
@@ -17,5 +18,9 @@ function ProductImage({ src }) {
     </ProductImageWrapper>
   );
 }
+
+ProductImage.propTypes = {
+  src: PropTypes.string.isRequired,
+};
 
 export default ProductImage;

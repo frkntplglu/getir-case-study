@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getAllCompanies } from "../../actions/companiesActions";
 import { getAllTags } from "../../actions/tagsActions";
+import SpinnerIcon from "../../components/Icons/Spinner";
 import ScrollableContent from "../../components/ScrollableContent";
 import SidebarBox from "../../components/SidebarBox";
 import Checkbox from "../../components/UI/Checkbox";
 import Radio from "../../components/UI/Radio";
+import theme from "../../styles/theme";
 
 const SORTING = [
   { id: 1, value: "Price low to high" },
@@ -31,6 +33,8 @@ function Sidebar() {
   const { loading: loadingTags, items: tags } = useSelector(
     (state) => state.tagsList
   );
+  console.log(tags);
+  console.log(companies);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,7 +52,6 @@ function Sidebar() {
           <Radio
             key={sort.id}
             name="sorting"
-            htmlFor={sort.id}
             labelText={sort.value}
             value={sort.id}
             handleRadioChange={handleChange}
@@ -58,30 +61,36 @@ function Sidebar() {
       </SidebarBox>
       <SidebarBox title="Brands">
         <ScrollableContent>
-          {companies?.map((company) => (
-            <Checkbox
-              key={company.slug}
-              htmlFor={company.slug}
-              labelText={company.name}
-              value={company.slug}
-              handleCheckboxChange={handleChange}
-              isDisabled={false}
-            />
-          ))}
+          {loadingCompanies ? (
+            <SpinnerIcon width={64} height={64} fill={theme.colors.mainColor} />
+          ) : (
+            companies.map((company) => (
+              <Checkbox
+                key={company.slug}
+                labelText={company.name}
+                value={company.slug}
+                handleCheckboxChange={handleChange}
+                isDisabled={false}
+              />
+            ))
+          )}
         </ScrollableContent>
       </SidebarBox>
       <SidebarBox title="Tags">
         <ScrollableContent>
-          {tags?.map((tag) => (
-            <Checkbox
-              key={tag}
-              htmlFor={tag}
-              labelText={tag}
-              value={tag}
-              handleCheckboxChange={handleChange}
-              isDisabled={false}
-            />
-          ))}
+          {loadingTags ? (
+            <SpinnerIcon width={64} height={64} fill={theme.colors.mainColor} />
+          ) : (
+            tags.map((tag) => (
+              <Checkbox
+                key={tag}
+                labelText={tag}
+                value={tag}
+                handleCheckboxChange={handleChange}
+                isDisabled={false}
+              />
+            ))
+          )}
         </ScrollableContent>
       </SidebarBox>
     </SidebarWrapper>

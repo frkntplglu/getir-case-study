@@ -47,18 +47,11 @@ const CheckboxLabel = styled.span`
   }
 `;
 
-function Checkbox({
-  htmlFor,
-  value,
-  labelText,
-  handleCheckboxChange,
-  isDisabled,
-}) {
+function Checkbox({ value, labelText, handleCheckboxChange, isDisabled }) {
   return (
-    <CheckboxInputWrapper htmlFor={htmlFor}>
+    <CheckboxInputWrapper>
       <CheckboxInput
         type="checkbox"
-        id={htmlFor}
         value={value}
         onChange={handleCheckboxChange}
         disabled={isDisabled}
@@ -71,7 +64,6 @@ function Checkbox({
 export default Checkbox;
 
 Checkbox.propTypes = {
-  htmlFor: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   labelText: PropTypes.string,
   handleCheckboxChange: PropTypes.func,

@@ -5,9 +5,10 @@ const ScrollableContent = styled.div`
     props.maxHeight ? props.maxHeight + "px" : "130px"};
   overflow-x: visible;
   overflow-y: auto;
-  padding-top: 5px;
-  padding-left: 5px;
-  margin-left: -5px;
+  padding-left: 10px;
+  margin-left: -10px;
+  padding-top: 10px;
+  margin-top: -10px;
 `;
 
 export default ScrollableContent;

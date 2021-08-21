@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Product from "../../components/Product";
 import { getAllProducts } from "../../actions/productsActions";
 import { useDispatch, useSelector } from "react-redux";
+import SpinnerIcon from "../../components/Icons/Spinner";
+import theme from "../../styles/theme";
 
 const ProductListWrapper = styled.div`
   width: 608px;
@@ -33,18 +35,21 @@ function ProductsList() {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
-  if (loading) return <div>Yükleniyor....</div>;
   return (
     <ProductListWrapper>
       <ProductListTitle>Products</ProductListTitle>
       <ProductListInnerWrapper>
-        {items.map((product) => (
-          <Product
-            key={product.slug}
-            data={product}
-            productImage="https://cdn.shopify.com/s/files/1/0250/8541/1390/products/1041_Product_1024x1024@2x.jpg?v=1619075008"
-          />
-        ))}
+        {loading ? (
+          <SpinnerIcon width={64} height={64} fill={theme.colors.mainColor} />
+        ) : (
+          items.map((product) => (
+            <Product
+              key={product.slug}
+              data={product}
+              productImage="https://cdn.shopify.com/s/files/1/0250/8541/1390/products/1041_Product_1024x1024@2x.jpg?v=1619075008"
+            />
+          ))
+        )}
       </ProductListInnerWrapper>
     </ProductListWrapper>
   );

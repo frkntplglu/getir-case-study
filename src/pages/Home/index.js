@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import CartSummary from "../../containers/CartSummary";
 import ProductsList from "../../containers/ProductsList";

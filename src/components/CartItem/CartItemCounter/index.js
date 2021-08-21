@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import TrashIcon from "../../Icons/Trash";
 import SpinnerIcon from "../../Icons/Spinner";
@@ -60,5 +61,10 @@ function CartItemCounter({ qty, updateCart }) {
     </CartItemCounterWrapper>
   );
 }
+
+CartItemCounter.propTypes = {
+  qty: PropTypes.number.isRequired,
+  updateCart: PropTypes.func.isRequired,
+};
 
 export default CartItemCounter;

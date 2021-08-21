@@ -7,7 +7,7 @@ import {
 const companiesReducer = (state = { loading: true, items: [] }, action) => {
   switch (action.type) {
     case COMPANIES_FETCH:
-      return { loading: true };
+      return { loading: true, items: [] };
     case COMPANIES_FETCH_SUCCESS:
       return { loading: false, items: action.payload };
     case COMPANIES_FETCH_FAIL:

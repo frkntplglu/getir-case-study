@@ -1,5 +1,5 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
-import ScrollableContent from "../ScrollableContent";
 import SidebarBoxContent from "./SidebarBoxContent";
 import SidebarBoxTitle from "./SidebarBoxTitle";
 
@@ -18,5 +18,10 @@ function SidebarBox({ title, children }) {
     </SidebarBoxWrapper>
   );
 }
+
+SidebarBox.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.any.isRequired,
+};
 
 export default SidebarBox;

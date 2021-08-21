@@ -4,7 +4,7 @@ import {
   TAGS_FETCH_SUCCESS,
 } from "../actions/types";
 
-export const tagsReducers = (state = [], action) => {
+export const tagsReducers = (state = { loading: true, items: [] }, action) => {
   switch (action.type) {
     case TAGS_FETCH:
       return { loading: true, items: [] };

@@ -1,10 +1,12 @@
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { addItemToCart } from "../../actions/cartActions";
 import AddCart from "./AddCart";
 import ProductImage from "./ProductImage";
 import ProductPrice from "./ProductPrice";
 import ProductTitle from "./ProductTitle";
+import noImage from "../../assets/no-image-found.png";
 
 const ProductWrapper = styled.div`
   width: 124px;
@@ -25,5 +27,23 @@ function Product({ data, productImage }) {
     </ProductWrapper>
   );
 }
+
+Product.propTypes = {
+  data: PropTypes.exact({
+    tags: PropTypes.array,
+    price: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    slug: PropTypes.string.isRequired,
+    added: PropTypes.number,
+    manufacturer: PropTypes.string,
+    itemType: PropTypes.string.isRequired,
+  }),
+  productImage: PropTypes.string,
+};
+
+Product.defaultProps = {
+  productImage: noImage,
+};
 
 export default Product;

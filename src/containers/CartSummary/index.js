@@ -25,19 +25,17 @@ function CartSummary() {
   const { items, totalPrice, spinner } = useSelector((state) => state.cart);
   return (
     <CartSummaryWrapper>
-      <ScrollableContent maxHeight={225}>
-        {items.length === 0
-          ? "There is no product in your basket"
-          : items.map((item) => (
-              <CartItem
-                key={item.slug}
-                slug={item.slug}
-                title={item.name}
-                price={item.price}
-                qty={item.qty}
-              />
-            ))}
-      </ScrollableContent>
+      {items.length === 0
+        ? "There is no product in your basket"
+        : items.map((item) => (
+            <CartItem
+              key={item.slug}
+              slug={item.slug}
+              title={item.name}
+              price={item.price}
+              qty={item.qty}
+            />
+          ))}
       <CartTotalPrice>
         {spinner ? (
           <SpinnerIcon width="36" height="36" fill={theme.colors.mainColor} />
