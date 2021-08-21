@@ -6,6 +6,9 @@ import Logo from "./Logo";
 const HeaderWrapper = styled.header`
   background-color: ${(props) => props.theme.colors.mainColor};
   height: 76px;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
 `;
 
 const HeaderContainer = styled(MainContainer)`

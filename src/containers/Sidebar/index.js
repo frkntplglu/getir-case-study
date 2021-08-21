@@ -20,6 +20,8 @@ const SidebarWrapper = styled.aside`
   max-width: 100%;
   width: 296px;
   flex-shrink: 0;
+  position: sticky;
+  top: 116px;
 `;
 
 function Sidebar() {

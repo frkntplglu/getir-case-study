@@ -17,6 +17,8 @@ const CartSummaryWrapper = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 116px;
 `;
 
 function CartSummary() {
