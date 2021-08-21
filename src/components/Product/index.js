@@ -1,4 +1,6 @@
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { addItemToCart } from "../../actions/cartActions";
 import AddCart from "./AddCart";
 import ProductImage from "./ProductImage";
 import ProductPrice from "./ProductPrice";
@@ -9,16 +11,17 @@ const ProductWrapper = styled.div`
   margin-bottom: 21px;
 `;
 
-function Product({ productImage }) {
-  const addToCart = () => {
-    alert("added to basket");
+function Product({ data, productImage }) {
+  const dispatch = useDispatch();
+  const addToCart = (data) => {
+    dispatch(addItemToCart(data));
   };
   return (
     <ProductWrapper>
       <ProductImage src={productImage} />
-      <ProductPrice>₺ 14,99</ProductPrice>
-      <ProductTitle>Rustic Beach Mug</ProductTitle>
-      <AddCart onClick={addToCart}>Add</AddCart>
+      <ProductPrice>₺ {data.price}</ProductPrice>
+      <ProductTitle>{data.name}</ProductTitle>
+      <AddCart onClick={() => addToCart(data)}>Add</AddCart>
     </ProductWrapper>
   );
 }

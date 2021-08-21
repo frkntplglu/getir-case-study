@@ -2,10 +2,12 @@ import { combineReducers } from "redux";
 import { cartReducer } from "./cartReducers";
 import { companiesReducer } from "./companiesReducers";
 import { productsReducers } from "./productsReducers";
+import { tagsReducers } from "./tagsReducers";
 
 const reducers = combineReducers({
-  products: productsReducers,
-  companies: companiesReducer,
+  productsList: productsReducers,
+  companiesList: companiesReducer,
+  tagsList: tagsReducers,
   cart: cartReducer,
 });
 

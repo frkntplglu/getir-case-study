@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import Footer from "./components/Footer";
 import Header from "./components/Header";

@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   PRODUCTS_FETCH,
   PRODUCTS_FETCH_SUCCESS,
@@ -7,17 +8,29 @@ import {
   SORT_PRODUCTS,
 } from "./types";
 
-const getAllProducts =
+export const getAllProducts =
   (page = 1) =>
-  (dispatch, getState) => {};
+  async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCTS_FETCH, payload: [] });
+      const { data } = await axios.get(
+        "http://localhost:3001/products?_page=1&_limit=16"
+      );
+      dispatch({ type: PRODUCTS_FETCH_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({ type: PRODUCTS_FETCH_FAIL, payload: error });
+    }
+  };
 
-const sortProducts =
-  (sortType = "LOW_TO_HIGH") =>
-  (dispatch, getState) => {};
+export const sortProducts =
+  (sortType = "SORT_LOW_TO_HIGH") =>
+  (dispatch) => {
+    dispatch({ type: sortType });
+  };
 
-const filterProductsByBrand =
+export const filterProductsByBrand =
   (brands = []) =>
-  (dispatch, getState) => {};
+  (dispatch) => {};
 
 const filterProductsByTagName =
   (tags = []) =>

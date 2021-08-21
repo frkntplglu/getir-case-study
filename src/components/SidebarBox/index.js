@@ -13,7 +13,7 @@ function SidebarBox({ title, children }) {
       <SidebarBoxTitle>{title}</SidebarBoxTitle>
       <SidebarBoxContent>
         <p>Buraya input</p>
-        <ScrollableContent>{children}</ScrollableContent>
+        {children}
       </SidebarBoxContent>
     </SidebarBoxWrapper>
   );

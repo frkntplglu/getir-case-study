@@ -1,5 +1,8 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CartItem from "../../components/CartItem";
+import ScrollableContent from "../../components/ScrollableContent";
 
 const CartSummaryWrapper = styled.div`
   margin-left: 16px;
@@ -13,11 +16,22 @@ const CartSummaryWrapper = styled.div`
 `;
 
 function CartSummary() {
+  const { items, totalPrice } = useSelector((state) => state.cart);
+  useEffect(() => {});
   return (
     <CartSummaryWrapper>
-      <CartItem title="Example Product" price="₺14,99" />
-      <CartItem title="New Product" price="₺26,99" />
-      <CartItem title="Refurbished Product" price="₺19,99" />
+      <ScrollableContent maxHeight={225}>
+        {items.length === 0
+          ? "There is no product in your basket"
+          : items.map((item) => (
+              <CartItem
+                key={item.slug}
+                title={item.name}
+                price={item.price}
+                qty={item.qty}
+              />
+            ))}
+      </ScrollableContent>
     </CartSummaryWrapper>
   );
 }

@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import Product from "../../components/Product";
+import { getAllProducts } from "../../actions/productsActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductListWrapper = styled.div`
   width: 608px;
@@ -25,26 +28,23 @@ const ProductListInnerWrapper = styled.div`
 `;
 
 function ProductsList() {
+  const dispatch = useDispatch();
+  const { loading, items } = useSelector((state) => state.productsList);
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+  if (loading) return <div>Yükleniyor....</div>;
   return (
     <ProductListWrapper>
       <ProductListTitle>Products</ProductListTitle>
       <ProductListInnerWrapper>
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
-        <Product productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png" />
+        {items.map((product) => (
+          <Product
+            key={product.slug}
+            data={product}
+            productImage="https://dragonflyeditorial.com/wp-content/uploads/2018/10/headphones.png"
+          />
+        ))}
       </ProductListInnerWrapper>
     </ProductListWrapper>
   );
