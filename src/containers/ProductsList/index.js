@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import Product from "../../components/Product";
 import { getAllProducts } from "../../actions/productsActions";
 import { useDispatch, useSelector } from "react-redux";
-import SpinnerIcon from "../../components/Icons/Spinner";
 import Alert from "../../components/UI/Alert";
-import theme from "../../styles/theme";
-import Modal from "../../components/UI/Modal";
 import mediaQueries from "../../styles/mediaQueries";
+import SkeletonLoader from "../../components/UI/ContentLoader";
 
 const ProductListWrapper = styled.div`
   flex-grow: 2;
@@ -27,7 +25,7 @@ const ProductListInnerWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, minmax(125px, 1fr));
   grid-gap: 22px;
-  padding: 20px 20px 0 20px;
+  padding: 20px;
   margin-top: 16px;
   @media ${mediaQueries.laptop} {
     grid-template-columns: repeat(3, minmax(125px, 1fr));
@@ -38,13 +36,8 @@ const ProductListInnerWrapper = styled.div`
 `;
 
 function ProductsList() {
-  const [isShowModal, setIsShowModal] = useState(false);
   const dispatch = useDispatch();
   const { loading, items, error } = useSelector((state) => state.productsList);
-
-  const handleModalClose = () => {
-    setIsShowModal(!isShowModal);
-  };
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -53,20 +46,20 @@ function ProductsList() {
   return (
     <ProductListWrapper>
       <ProductListTitle>Products</ProductListTitle>
-      <Modal onClose={handleModalClose} isShown={isShowModal} />
+
       <ProductListInnerWrapper>
         {error ? <Alert type="error">{error}</Alert> : null}
-        {loading ? (
-          <SpinnerIcon width={64} height={64} fill={theme.colors.mainColor} />
-        ) : (
-          items.map((product) => (
-            <Product
-              key={product.slug}
-              data={product}
-              productImage="https://cdn.shopify.com/s/files/1/0250/8541/1390/products/1041_Product_1024x1024@2x.jpg?v=1619075008"
-            />
-          ))
-        )}
+        {loading
+          ? Array(16)
+              .fill()
+              .map((loader, index) => <SkeletonLoader key={index} />)
+          : items.map((product) => (
+              <Product
+                key={product.slug}
+                data={product}
+                productImage="https://cdn.shopify.com/s/files/1/0250/8541/1390/products/1041_Product_1024x1024@2x.jpg?v=1619075008"
+              />
+            ))}
       </ProductListInnerWrapper>
     </ProductListWrapper>
   );

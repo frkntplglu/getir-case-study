@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getAllCompanies } from "../../actions/companiesActions";
+import { sortProducts } from "../../actions/productsActions";
 import { getAllTags } from "../../actions/tagsActions";
 import SpinnerIcon from "../../components/Icons/Spinner";
 import ScrollableContent from "../../components/ScrollableContent";
@@ -45,6 +46,27 @@ function Sidebar() {
     dispatch(getAllCompanies());
     dispatch(getAllTags());
   }, [dispatch]);
+
+  const handleSorting = (e) => {
+    const sortType = e.target.value;
+    console.log(e.target.value);
+    switch (sortType) {
+      case "1":
+        dispatch(sortProducts("SORT_BY_PRICE_ASC"));
+        break;
+      case "2":
+        dispatch(sortProducts("SORT_BY_PRICE_DESC"));
+        break;
+      case "3":
+        dispatch(sortProducts("SORT_BY_DATE_DESC"));
+        break;
+      case "4":
+        dispatch(sortProducts("SORT_BY_DATE_ASC"));
+        break;
+      default:
+        return;
+    }
+  };
   const handleInputChange = () => {};
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -58,7 +80,7 @@ function Sidebar() {
             name="sorting"
             labelText={sort.value}
             value={sort.id}
-            handleRadioChange={handleChange}
+            handleOnChange={handleSorting}
             isDisabled={false}
           />
         ))}

@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { addItemToCart } from "../../actions/cartActions";
@@ -19,7 +20,9 @@ function Product({ data, productImage }) {
     <ProductWrapper>
       <ProductImage src={productImage} altDescription={data.description} />
       <ProductPrice>₺ {data.price}</ProductPrice>
-      <ProductTitle>{data.name}</ProductTitle>
+      <ProductTitle>
+        <Link to={`/product/${data.slug}`}>{data.name}</Link>
+      </ProductTitle>
       <AddCart onClick={() => addToCart(data)}>Add</AddCart>
     </ProductWrapper>
   );

@@ -20,8 +20,9 @@ export const getAllProducts = () => async (dispatch) => {
 };
 
 export const sortProducts =
-  (sortType = "SORT_LOW_TO_HIGH") =>
+  (sortType = "") =>
   (dispatch) => {
+    console.log(sortType);
     dispatch({ type: sortType });
   };
 
