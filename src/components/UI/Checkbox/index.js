@@ -27,9 +27,10 @@ const CheckboxInput = styled.input.attrs({ type: "checkbox" })`
   }
 `;
 
-const CheckboxLabel = styled.span`
+const CheckboxLabel = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   position: relative;
   color: ${(props) => props.theme.colors.filterTextColor};
   &:before {
@@ -45,9 +46,21 @@ const CheckboxLabel = styled.span`
   &:after {
     transition: all 0.3s ease 0s;
   }
+  span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 150px;
+  }
 `;
 
-function Checkbox({ value, labelText, handleOnChange, isDisabled }) {
+const ExtraInfo = styled.small`
+  color: #a8a8a8;
+  font-size: 14px;
+  margin-left: 5px;
+`;
+
+function Checkbox({ value, labelText, handleOnChange, isDisabled, extraInfo }) {
   return (
     <CheckboxInputWrapper>
       <CheckboxInput
@@ -56,7 +69,10 @@ function Checkbox({ value, labelText, handleOnChange, isDisabled }) {
         onChange={handleOnChange}
         disabled={isDisabled}
       />
-      <CheckboxLabel>{labelText}</CheckboxLabel>
+      <CheckboxLabel>
+        <span>{labelText}</span>
+        {extraInfo ? <ExtraInfo>({extraInfo})</ExtraInfo> : null}
+      </CheckboxLabel>
     </CheckboxInputWrapper>
   );
 }
@@ -66,6 +82,7 @@ Checkbox.propTypes = {
   labelText: PropTypes.string,
   handleCheckboxChange: PropTypes.func,
   isDisabled: PropTypes.bool,
+  extraInfo: PropTypes.any,
 };
 
 export default Checkbox;

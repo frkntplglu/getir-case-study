@@ -9,6 +9,20 @@ const ScrollableContent = styled.div`
   margin-left: -10px;
   padding-top: 10px;
   margin-top: -10px;
+  &::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 4px;
+  }
 `;
 
 export default ScrollableContent;

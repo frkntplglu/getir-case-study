@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size:14px;
     }
+
 `;
 
 export default GlobalStyle;

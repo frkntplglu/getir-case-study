@@ -18,6 +18,10 @@ import Checkbox from "../../components/UI/Checkbox";
 import Input from "../../components/UI/Input";
 import Radio from "../../components/UI/Radio";
 import theme from "../../styles/theme";
+import {
+  numberOfProductOfBrand,
+  numberOfProductTag,
+} from "../../utils/handleNumber";
 
 const SORTING = [
   { id: 1, value: "Price low to high" },
@@ -31,8 +35,6 @@ const SidebarWrapper = styled.aside`
   margin-right: 16px;
   max-width: 100%;
   width: 296px;
-  position: sticky;
-  top: 116px;
 `;
 
 function Sidebar() {
@@ -46,6 +48,8 @@ function Sidebar() {
     items: tags,
     error: tagsError,
   } = useSelector((state) => state.tagsList);
+
+  const { items: productList } = useSelector((state) => state.productsList);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -109,6 +113,7 @@ function Sidebar() {
                 value={company.slug}
                 handleOnChange={handleChange}
                 isDisabled={false}
+                extraInfo={numberOfProductOfBrand(productList, company.slug)}
               />
             ))
           )}
@@ -132,6 +137,7 @@ function Sidebar() {
                 value={tag}
                 handleOnChange={handleChange}
                 isDisabled={false}
+                extraInfo={numberOfProductTag(productList, tag)}
               />
             ))
           )}
