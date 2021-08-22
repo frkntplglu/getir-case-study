@@ -6,6 +6,7 @@ import SpinnerIcon from "../../components/Icons/Spinner";
 import theme from "../../styles/theme";
 
 const CartSummaryWrapper = styled.div`
+  flex: 1 0 auto;
   margin-left: 16px;
   max-width: 100%;
   width: 296px;

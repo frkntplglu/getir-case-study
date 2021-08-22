@@ -8,10 +8,7 @@ import ProductPrice from "./ProductPrice";
 import ProductTitle from "./ProductTitle";
 import noImage from "../../assets/no-image-found.png";
 
-const ProductWrapper = styled.div`
-  width: 124px;
-  margin-bottom: 21px;
-`;
+const ProductWrapper = styled.div``;
 
 function Product({ data, productImage }) {
   const dispatch = useDispatch();

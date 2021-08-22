@@ -7,10 +7,10 @@ import SpinnerIcon from "../../components/Icons/Spinner";
 import Alert from "../../components/UI/Alert";
 import theme from "../../styles/theme";
 import Modal from "../../components/UI/Modal";
+import mediaQueries from "../../styles/mediaQueries";
 
 const ProductListWrapper = styled.div`
-  width: 608px;
-  flex-shrink: 0;
+  flex-grow: 2;
 `;
 
 const ProductListTitle = styled.h2`
@@ -24,15 +24,21 @@ const ProductListInnerWrapper = styled.div`
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0px 4px 24px rgba(93, 62, 188, 0.04);
-  display: flex;
-  padding: 19px 19px 0 19px;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(125px, 1fr));
+  grid-gap: 22px;
+  padding: 20px 20px 0 20px;
   margin-top: 16px;
+  @media ${mediaQueries.laptop} {
+    grid-template-columns: repeat(3, minmax(125px, 1fr));
+  }
+  @media ${mediaQueries.tablet} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 function ProductsList() {
-  const [isShowModal, setIsShowModal] = useState(true);
+  const [isShowModal, setIsShowModal] = useState(false);
   const dispatch = useDispatch();
   const { loading, items, error } = useSelector((state) => state.productsList);
 

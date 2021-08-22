@@ -2,6 +2,7 @@ import styled from "styled-components";
 import CartSummary from "../../containers/CartSummary";
 import ProductsList from "../../containers/ProductsList";
 import Sidebar from "../../containers/Sidebar";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const HomePageContainer = styled.div`
   width: 100%;
@@ -10,11 +11,12 @@ const HomePageContainer = styled.div`
 `;
 
 function Home() {
+  const size = useWindowSize();
   return (
     <HomePageContainer>
-      <Sidebar />
+      {size.width > 768 ? <Sidebar /> : null}
       <ProductsList />
-      <CartSummary />
+      {size.width > 1260 ? <CartSummary /> : null}
     </HomePageContainer>
   );
 }

@@ -20,10 +20,10 @@ const SORTING = [
 ];
 
 const SidebarWrapper = styled.aside`
+  flex: 1 0 auto;
   margin-right: 16px;
   max-width: 100%;
   width: 296px;
-  flex-shrink: 0;
   position: sticky;
   top: 116px;
 `;
