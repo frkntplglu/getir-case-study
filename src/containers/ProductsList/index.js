@@ -8,6 +8,7 @@ import mediaQueries from "../../styles/mediaQueries";
 import SkeletonLoader from "../../components/UI/ContentLoader";
 import handlePagination from "../../utils/handlePagination";
 import Pagination from "../Pagination";
+import ItemTypeFilter from "../../components/ItemTypeFilter";
 
 const ProductListWrapper = styled.div`
   flex-grow: 2;
@@ -16,7 +17,7 @@ const ProductListWrapper = styled.div`
 const ProductListTitle = styled.h2`
   font-size: 20px;
   font-weight: 400;
-  color: ${(props) => props.theme.colors.pageTitle};
+  color: ${(props) => props.theme.colors.pageTitleColor};
   margin-bottom: 16px;
 `;
 
@@ -57,7 +58,7 @@ function ProductsList() {
   return (
     <ProductListWrapper>
       <ProductListTitle>Products</ProductListTitle>
-
+      <ItemTypeFilter />
       <ProductListInnerWrapper>
         {error ? <Alert type="error">{error}</Alert> : null}
         {loading
