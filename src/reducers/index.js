@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { cartReducer } from "./cartReducers";
+import { commonReducers } from "./commonReducers";
 import { companiesReducer } from "./companiesReducers";
 import { productsReducers } from "./productsReducers";
 import { tagsReducers } from "./tagsReducers";

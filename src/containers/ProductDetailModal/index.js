@@ -8,6 +8,7 @@ import getirAPI from "../../services/getirAPI.js";
 import { addItemToCart } from "../../actions/cartActions";
 import SpinnerIcon from "../../components/Icons/Spinner";
 import ModalLoader from "../../components/UI/ContentLoader/ModalLoader";
+import { setModal } from "../../actions/commonActions.js";
 
 const modalRoot = document.getElementById("modal-root");
 
@@ -135,8 +136,10 @@ function ProductDetailModal() {
       const { data } = await getirAPI.get(`/products/?slug=${slug}`);
       setProductDetail(data);
     };
-
+    document.querySelector("body").style.overflow = "hidden";
     getProductDetail();
+
+    return () => (document.querySelector("body").style.overflow = "auto");
   }, [slug]);
 
   useEffect(() => {

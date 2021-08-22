@@ -4,6 +4,12 @@ import styled from "styled-components";
 import { getAllCompanies } from "../../actions/companiesActions";
 import { sortProducts } from "../../actions/productsActions";
 import { getAllTags } from "../../actions/tagsActions";
+import {
+  SORT_BY_DATE_ASC,
+  SORT_BY_DATE_DESC,
+  SORT_BY_PRICE_ASC,
+  SORT_BY_PRICE_DESC,
+} from "../../actions/types";
 import SpinnerIcon from "../../components/Icons/Spinner";
 import ScrollableContent from "../../components/ScrollableContent";
 import SidebarBox from "../../components/SidebarBox";
@@ -52,16 +58,16 @@ function Sidebar() {
     console.log(e.target.value);
     switch (sortType) {
       case "1":
-        dispatch(sortProducts("SORT_BY_PRICE_ASC"));
+        dispatch(sortProducts(SORT_BY_PRICE_ASC));
         break;
       case "2":
-        dispatch(sortProducts("SORT_BY_PRICE_DESC"));
+        dispatch(sortProducts(SORT_BY_PRICE_DESC));
         break;
       case "3":
-        dispatch(sortProducts("SORT_BY_DATE_DESC"));
+        dispatch(sortProducts(SORT_BY_DATE_DESC));
         break;
       case "4":
-        dispatch(sortProducts("SORT_BY_DATE_ASC"));
+        dispatch(sortProducts(SORT_BY_DATE_ASC));
         break;
       default:
         return;

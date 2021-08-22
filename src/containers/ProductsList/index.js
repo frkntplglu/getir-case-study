@@ -7,6 +7,7 @@ import Alert from "../../components/UI/Alert";
 import mediaQueries from "../../styles/mediaQueries";
 import SkeletonLoader from "../../components/UI/ContentLoader";
 import handlePagination from "../../utils/handlePagination";
+import Pagination from "../Pagination";
 
 const ProductListWrapper = styled.div`
   flex-grow: 2;
@@ -36,25 +37,6 @@ const ProductListInnerWrapper = styled.div`
   }
 `;
 
-const PaginationButton = styled.button`
-  background: none;
-  width: 32px;
-  height: 40px;
-  border-radius: 2px;
-  color: #697488;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  &:hover {
-    color: ${(props) => props.theme.colors.mainColor};
-  }
-  &.active {
-    background-color: ${(props) => props.theme.colors.mainColor};
-    color: #fff;
-  }
-`;
-
 function ProductsList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(16);
@@ -63,6 +45,10 @@ function ProductsList() {
   const { loading, items, error, totalProducts } = useSelector(
     (state) => state.productsList
   );
+
+  const handlePaginate = (number) => {
+    setCurrentPage(number);
+  };
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -75,7 +61,7 @@ function ProductsList() {
       <ProductListInnerWrapper>
         {error ? <Alert type="error">{error}</Alert> : null}
         {loading
-          ? Array(16)
+          ? Array(productsPerPage)
               .fill()
               .map((loader, index) => <SkeletonLoader key={index} />)
           : handlePagination(items, { currentPage, productsPerPage }).map(
@@ -88,18 +74,12 @@ function ProductsList() {
               )
             )}
       </ProductListInnerWrapper>
-      {totalProducts
-        ? Array(Math.ceil(totalProducts / productsPerPage))
-            .fill()
-            .map((item, index) => (
-              <PaginationButton
-                onClick={() => setCurrentPage(index + 1)}
-                key={index}
-              >
-                {index + 1}
-              </PaginationButton>
-            ))
-        : null}
+      <Pagination
+        currentPage={currentPage}
+        totalPage={totalProducts}
+        itemPerPage={productsPerPage}
+        paginate={handlePaginate}
+      />
     </ProductListWrapper>
   );
 }
