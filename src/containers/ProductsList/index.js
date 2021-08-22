@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "../../components/Product";
 import { getAllProducts } from "../../actions/productsActions";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../components/UI/Alert";
 import mediaQueries from "../../styles/mediaQueries";
 import SkeletonLoader from "../../components/UI/ContentLoader";
+import handlePagination from "../../utils/handlePagination";
 
 const ProductListWrapper = styled.div`
   flex-grow: 2;
@@ -35,9 +36,33 @@ const ProductListInnerWrapper = styled.div`
   }
 `;
 
+const PaginationButton = styled.button`
+  background: none;
+  width: 32px;
+  height: 40px;
+  border-radius: 2px;
+  color: #697488;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    color: ${(props) => props.theme.colors.mainColor};
+  }
+  &.active {
+    background-color: ${(props) => props.theme.colors.mainColor};
+    color: #fff;
+  }
+`;
+
 function ProductsList() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(16);
+
   const dispatch = useDispatch();
-  const { loading, items, error } = useSelector((state) => state.productsList);
+  const { loading, items, error, totalProducts } = useSelector(
+    (state) => state.productsList
+  );
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -53,14 +78,28 @@ function ProductsList() {
           ? Array(16)
               .fill()
               .map((loader, index) => <SkeletonLoader key={index} />)
-          : items.map((product) => (
-              <Product
-                key={product.slug}
-                data={product}
-                productImage="https://cdn.shopify.com/s/files/1/0250/8541/1390/products/1041_Product_1024x1024@2x.jpg?v=1619075008"
-              />
-            ))}
+          : handlePagination(items, { currentPage, productsPerPage }).map(
+              (product) => (
+                <Product
+                  key={product.slug}
+                  data={product}
+                  productImage="https://cdn.shopify.com/s/files/1/0250/8541/1390/products/1041_Product_1024x1024@2x.jpg?v=1619075008"
+                />
+              )
+            )}
       </ProductListInnerWrapper>
+      {totalProducts
+        ? Array(Math.ceil(totalProducts / productsPerPage))
+            .fill()
+            .map((item, index) => (
+              <PaginationButton
+                onClick={() => setCurrentPage(index + 1)}
+                key={index}
+              >
+                {index + 1}
+              </PaginationButton>
+            ))
+        : null}
     </ProductListWrapper>
   );
 }

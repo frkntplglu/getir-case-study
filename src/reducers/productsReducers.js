@@ -8,15 +8,16 @@ import {
   SORT_BY_DATE_DESC,
 } from "../actions/types";
 
-// asc -> from small to large
-// desc -> from large to small
-
 const productsReducers = (state = { loading: true, items: [] }, action) => {
   switch (action.type) {
     case PRODUCTS_FETCH:
       return { loading: true, items: [] };
     case PRODUCTS_FETCH_SUCCESS:
-      return { loading: false, items: action.payload };
+      return {
+        loading: false,
+        items: action.payload,
+        totalProducts: action.payload.length,
+      };
     case PRODUCTS_FETCH_FAIL:
       return { loading: false, items: [], error: action.payload };
     case SORT_BY_PRICE_ASC:
