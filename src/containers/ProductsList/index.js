@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import Product from "../../components/Product";
-import { getAllProducts } from "../../actions/productsActions";
+import { getAllProducts, setCurrentPage } from "../../actions/productsActions";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../components/UI/Alert";
 import mediaQueries from "../../styles/mediaQueries";
@@ -39,16 +39,12 @@ const ProductListInnerWrapper = styled.div`
 `;
 
 function ProductsList() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(16);
-
   const dispatch = useDispatch();
-  const { loading, items, error, totalProducts } = useSelector(
-    (state) => state.productsList
-  );
+  const { loading, currentPage, productsPerPage, filteredItems, error } =
+    useSelector((state) => state.productsList);
 
   const handlePaginate = (number) => {
-    setCurrentPage(number);
+    dispatch(setCurrentPage(number));
   };
 
   useEffect(() => {
@@ -65,19 +61,20 @@ function ProductsList() {
           ? Array(productsPerPage)
               .fill()
               .map((loader, index) => <SkeletonLoader key={index} />)
-          : handlePagination(items, { currentPage, productsPerPage }).map(
-              (product) => (
-                <Product
-                  key={product.slug}
-                  data={product}
-                  productImage="https://cdn.shopify.com/s/files/1/0250/8541/1390/products/1041_Product_1024x1024@2x.jpg?v=1619075008"
-                />
-              )
-            )}
+          : handlePagination(filteredItems, {
+              currentPage,
+              productsPerPage,
+            }).map((product) => (
+              <Product
+                key={product.slug}
+                data={product}
+                productImage="https://cdn.shopify.com/s/files/1/0250/8541/1390/products/1041_Product_1024x1024@2x.jpg?v=1619075008"
+              />
+            ))}
       </ProductListInnerWrapper>
       <Pagination
         currentPage={currentPage}
-        totalPage={totalProducts}
+        totalItem={filteredItems.length}
         itemPerPage={productsPerPage}
         paginate={handlePaginate}
       />

@@ -7,7 +7,7 @@ import {
   CART_UNSET_SPINNER,
 } from "./types";
 
-export const addItemToCart = (product) => (dispatch) => {
+const addItemToCart = (product) => (dispatch) => {
   dispatch({ type: CART_SET_SPINNER });
   dispatch({ type: CART_ADD_ITEM, payload: product });
   dispatch({ type: CART_TOTAL });
@@ -16,7 +16,7 @@ export const addItemToCart = (product) => (dispatch) => {
   }, 250);
 };
 
-export const updateItemInCart = (type, slug) => (dispatch) => {
+const updateItemInCart = (type, slug) => (dispatch) => {
   dispatch({ type: CART_SET_SPINNER });
   if (type === "increase") {
     dispatch({ type: CART_INCREASE_QTY, payload: slug });
@@ -28,3 +28,5 @@ export const updateItemInCart = (type, slug) => (dispatch) => {
     dispatch({ type: CART_UNSET_SPINNER });
   }, 250);
 };
+
+export { addItemToCart, updateItemInCart };

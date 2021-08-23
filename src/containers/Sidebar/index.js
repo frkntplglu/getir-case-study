@@ -1,8 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getAllCompanies } from "../../actions/companiesActions";
-import { sortProducts } from "../../actions/productsActions";
+import {
+  addBrandToFilter,
+  removeBrandFromFilter,
+  addTagToFilter,
+  removeTagFromFilter,
+  sortProducts,
+} from "../../actions/productsActions";
 import { getAllTags } from "../../actions/tagsActions";
 import {
   SORT_BY_DATE_ASC,
@@ -20,7 +26,7 @@ import Radio from "../../components/UI/Radio";
 import theme from "../../styles/theme";
 import {
   numberOfProductOfBrand,
-  numberOfProductTag,
+  numberOfProductOfTag,
 } from "../../utils/handleNumber";
 
 const SORTING = [
@@ -38,18 +44,32 @@ const SidebarWrapper = styled.aside`
 `;
 
 function Sidebar() {
-  const {
+  const [isAllBrand, setIsAllBrand] = useState(false);
+  const [isAllTag, setIsAllTag] = useState(false);
+  const [brandSearchKeyword, setBrandSearchKeyword] = useState("");
+  const [tagSearchKeyword, setTagSearchKeyword] = useState("");
+  let {
     loading: loadingCompanies,
     items: companies,
     error: companiesError,
   } = useSelector((state) => state.companiesList);
+
+  const currentlyDisplayedCompanies = companies.filter((company) =>
+    company.slug.toLowerCase().includes(brandSearchKeyword.toLowerCase())
+  );
+
   const {
     loading: loadingTags,
     items: tags,
     error: tagsError,
   } = useSelector((state) => state.tagsList);
 
-  const { items: productList } = useSelector((state) => state.productsList);
+  const currentlyDisplayedTags = tags.filter((tag) =>
+    tag.toLowerCase().includes(tagSearchKeyword.toLowerCase())
+  );
+
+  const { items, filteredItems } = useSelector((state) => state.productsList);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -77,9 +97,27 @@ function Sidebar() {
         return;
     }
   };
-  const handleInputChange = () => {};
-  const handleChange = (e) => {
-    console.log(e.target.value);
+
+  const handleBrandChange = (e) => {
+    if (e.target.value === "all") {
+      setIsAllBrand(!isAllBrand);
+    }
+    if (e.target.checked) {
+      dispatch(addBrandToFilter(e.target.value));
+    } else {
+      dispatch(removeBrandFromFilter(e.target.value));
+    }
+  };
+
+  const handleTagChange = (e) => {
+    if (e.target.value === "all") {
+      setIsAllTag(!isAllTag);
+    }
+    if (e.target.checked) {
+      dispatch(addTagToFilter(e.target.value));
+    } else {
+      dispatch(removeTagFromFilter(e.target.value));
+    }
   };
   return (
     <SidebarWrapper>
@@ -97,23 +135,30 @@ function Sidebar() {
       </SidebarBox>
       <SidebarBox title="Brands">
         <Input
-          value=""
+          value={brandSearchKeyword}
           placeholder="Search brand"
-          handleOnChange={handleInputChange}
+          handleOnChange={(e) => setBrandSearchKeyword(e.target.value)}
         />
         <ScrollableContent>
+          <Checkbox
+            labelText="All"
+            value="all"
+            handleOnChange={handleBrandChange}
+            isDisabled={false}
+            extraInfo={numberOfProductOfBrand(items)}
+          />
           {companiesError ? <Alert type="error">{companiesError}</Alert> : null}
           {loadingCompanies ? (
             <SpinnerIcon width={64} height={64} fill={theme.colors.mainColor} />
           ) : (
-            companies.map((company) => (
+            currentlyDisplayedCompanies.map((company) => (
               <Checkbox
                 key={company.slug}
                 labelText={company.name}
                 value={company.slug}
-                handleOnChange={handleChange}
-                isDisabled={false}
-                extraInfo={numberOfProductOfBrand(productList, company.slug)}
+                handleOnChange={handleBrandChange}
+                isDisabled={isAllBrand}
+                extraInfo={numberOfProductOfBrand(filteredItems, company.slug)}
               />
             ))
           )}
@@ -121,23 +166,30 @@ function Sidebar() {
       </SidebarBox>
       <SidebarBox title="Tags">
         <Input
-          value=""
+          value={tagSearchKeyword}
           placeholder="Search tag"
-          handleOnChange={handleInputChange}
+          handleOnChange={(e) => setTagSearchKeyword(e.target.value)}
         />
         <ScrollableContent>
+          <Checkbox
+            labelText="All"
+            value="all"
+            handleOnChange={handleTagChange}
+            isDisabled={false}
+            extraInfo={numberOfProductOfTag(items)}
+          />
           {tagsError ? <Alert type="error">{companiesError}</Alert> : null}
           {loadingTags ? (
             <SpinnerIcon width={64} height={64} fill={theme.colors.mainColor} />
           ) : (
-            tags.map((tag) => (
+            currentlyDisplayedTags.map((tag) => (
               <Checkbox
                 key={tag}
                 labelText={tag}
                 value={tag}
-                handleOnChange={handleChange}
-                isDisabled={false}
-                extraInfo={numberOfProductTag(productList, tag)}
+                handleOnChange={handleTagChange}
+                isDisabled={isAllTag}
+                extraInfo={numberOfProductOfTag(filteredItems, tag)}
               />
             ))
           )}

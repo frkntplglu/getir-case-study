@@ -6,7 +6,7 @@ import {
   COMPANIES_FETCH_FAIL,
 } from "./types";
 
-export const getAllCompanies = () => async (dispatch) => {
+const getAllCompanies = () => async (dispatch) => {
   try {
     dispatch({ type: COMPANIES_FETCH, payload: [] });
     const { data } = await getirAPI.get("/companies");
@@ -15,3 +15,5 @@ export const getAllCompanies = () => async (dispatch) => {
     dispatch({ type: COMPANIES_FETCH_FAIL, payload: error.message });
   }
 };
+
+export { getAllCompanies };

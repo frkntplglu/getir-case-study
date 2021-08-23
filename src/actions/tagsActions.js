@@ -6,7 +6,7 @@ import {
   TAGS_FETCH_SUCCESS,
 } from "../actions/types";
 
-export const getAllTags = () => async (dispatch) => {
+const getAllTags = () => async (dispatch) => {
   try {
     dispatch({ type: TAGS_FETCH });
     const { data } = await getirAPI.get("/tags");
@@ -15,3 +15,5 @@ export const getAllTags = () => async (dispatch) => {
     dispatch({ type: TAGS_FETCH_FAIL, payload: error.message });
   }
 };
+
+export { getAllTags };

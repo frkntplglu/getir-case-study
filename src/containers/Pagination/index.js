@@ -7,7 +7,7 @@ const PaginationWrapper = styled.div`
 
 const PaginationButton = styled.button`
   background: none;
-  width: 32px;
+  min-width: 32px;
   height: 40px;
   border-radius: 2px;
   color: #697488;
@@ -24,15 +24,27 @@ const PaginationButton = styled.button`
   }
 `;
 
-function Pagination({ totalPage, itemPerPage, paginate, currentPage }) {
+const PrevBtn = styled(PaginationButton)`
+  margin-right: 34px;
+`;
+
+const NextBtn = styled(PaginationButton)`
+  margin-left: 34px;
+`;
+
+function Pagination({ totalItem, itemPerPage, paginate, currentPage }) {
   const pageNumbers = [];
-  console.log(totalPage);
-  for (let i = 1; i <= Math.ceil(totalPage / itemPerPage); i++) {
+  const totalPage = Math.ceil(totalItem / itemPerPage);
+  for (let i = 1; i <= totalPage; i++) {
     pageNumbers.push(i);
   }
 
   return (
     <PaginationWrapper>
+      {currentPage !== 1 ? (
+        <PrevBtn onClick={() => paginate(currentPage - 1)}>Prev</PrevBtn>
+      ) : null}
+
       {pageNumbers.map((number) => (
         <PaginationButton
           className={currentPage === number ? "active" : null}
@@ -42,12 +54,15 @@ function Pagination({ totalPage, itemPerPage, paginate, currentPage }) {
           {number}
         </PaginationButton>
       ))}
+      {currentPage !== totalPage ? (
+        <NextBtn onClick={() => paginate(currentPage + 1)}>Next</NextBtn>
+      ) : null}
     </PaginationWrapper>
   );
 }
 
 Pagination.propTypes = {
-  totalPage: PropTypes.number,
+  totalItem: PropTypes.number,
   itemPerPage: PropTypes.number.isRequired,
   paginate: PropTypes.func.isRequired,
 };

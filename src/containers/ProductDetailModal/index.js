@@ -8,7 +8,6 @@ import getirAPI from "../../services/getirAPI.js";
 import { addItemToCart } from "../../actions/cartActions";
 import SpinnerIcon from "../../components/Icons/Spinner";
 import ModalLoader from "../../components/UI/ContentLoader/ModalLoader";
-import { setModal } from "../../actions/commonActions.js";
 
 const modalRoot = document.getElementById("modal-root");
 

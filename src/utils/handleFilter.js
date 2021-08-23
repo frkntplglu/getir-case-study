@@ -1,9 +1,20 @@
 const filterByBrand = (data, brandList) => {
-  data.filter((item) => brandList.includes(item.manufacturer));
+  if (!brandList.length) return data;
+  return data.filter((item) => brandList.includes(item.manufacturer));
 };
 
 const filterByTag = (data, tagList) => {
-  data.filter((item) => tagList.includes(item.tags));
+  if (!tagList.length) return data;
+  const filteredData = [];
+  tagList.forEach((tag) => {
+    filteredData.push(...data.filter((item) => item.tags.includes(tag)));
+  });
+
+  return filteredData;
 };
 
-export { filterByBrand, filterByTag };
+const filterData = (data, brandList, tagList) => {
+  return filterByTag(filterByBrand(data, brandList), tagList);
+};
+
+export { filterData };

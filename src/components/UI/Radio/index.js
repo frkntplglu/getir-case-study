@@ -64,9 +64,9 @@ function Radio({ value, name, labelText, handleOnChange, isDisabled }) {
 }
 
 Radio.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  labelText: PropTypes.string,
-  handleRadioChange: PropTypes.func,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  labelText: PropTypes.string.isRequired,
+  handleOnChange: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool,
 };
 

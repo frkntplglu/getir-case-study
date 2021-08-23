@@ -12,16 +12,19 @@ const CheckboxInputWrapper = styled.label`
 const CheckboxInput = styled.input.attrs({ type: "checkbox" })`
   display: none;
   opacity: 0;
-  &:checked + span:before {
+  &:disabled + div {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  &:checked + div:before {
     background: ${(props) => props.theme.colors.mainColor};
   }
-  &:checked + span:after {
+  &:checked + div:after {
     content: "";
     background: url(${check}) no-repeat center center;
     display: block;
     width: 22px;
     height: 22px;
-
     position: absolute;
     left: 0px;
   }
@@ -71,16 +74,16 @@ function Checkbox({ value, labelText, handleOnChange, isDisabled, extraInfo }) {
       />
       <CheckboxLabel>
         <span>{labelText}</span>
-        {extraInfo ? <ExtraInfo>({extraInfo})</ExtraInfo> : null}
+        <ExtraInfo>{extraInfo ? `(${extraInfo})` : "(0)"}</ExtraInfo>
       </CheckboxLabel>
     </CheckboxInputWrapper>
   );
 }
 
 Checkbox.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  labelText: PropTypes.string,
-  handleCheckboxChange: PropTypes.func,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  labelText: PropTypes.string.isRequired,
+  handleOnChange: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool,
   extraInfo: PropTypes.any,
 };
