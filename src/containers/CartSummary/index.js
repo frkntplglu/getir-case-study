@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CartItem from "../../components/CartItem";
@@ -6,6 +7,7 @@ import SpinnerIcon from "../../components/Icons/Spinner";
 import theme from "../../styles/theme";
 
 const CartSummaryWrapper = styled.div`
+  background: #fff;
   flex: 1 0 auto;
   margin-left: 16px;
   max-width: 100%;
@@ -17,14 +19,16 @@ const CartSummaryWrapper = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  position: sticky;
-  top: 116px;
+  ${(props) =>
+    !props.inHeader
+      ? "position: sticky; top:116px;"
+      : "position:absolute; top:76px; right:0;"}
 `;
 
-function CartSummary() {
+function CartSummary({ inHeader }) {
   const { items, totalPrice, spinner } = useSelector((state) => state.cart);
   return (
-    <CartSummaryWrapper>
+    <CartSummaryWrapper inHeader={inHeader}>
       {items.length === 0
         ? "There is no product in your basket"
         : items.map((item) => (
@@ -46,5 +50,13 @@ function CartSummary() {
     </CartSummaryWrapper>
   );
 }
+
+CartSummary.propTypes = {
+  inHeader: PropTypes.bool,
+};
+
+CartSummary.defaultProps = {
+  inHeader: false,
+};
 
 export default CartSummary;
