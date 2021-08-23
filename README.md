@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# Getir Frontend Case
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## _The Last Markdown Editor, Ever_
 
-## Available Scripts
+This project is a simple product listing and shopping cart that you can filter and sort the products by using UI. You can think of this project as a MVP, it was developed as soon as possible because "Speed is our currency 😊"
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Filter by item type "mug" or "shirt"
+- Filter by brand the product belongs
+- Filter by tags the product has
+- Sort by price and added date ascendant or descendant
+- Show only 16 products in a page and manage by a simple pagination
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Bonus Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+On top of requirements, I added some additional features. You can see Skeleton loader and spinner in order to provide a better UI experience to the user and you can click the name of a product, then you will see a modal that works based on current route to be able to see product's detail.
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React
+- Redux
+- Redux
+- Styled Component
+- JSON-Server
+- React Router
 
-### `npm run build`
+## Folder Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+##### Components
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+In this folder you can find presentational components. It means that these components don't care about global state. They may have their own state or props. They're about how things seem on a page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##### Containers
 
-### `npm run eject`
+In this folder you can find container components. It means that these components are related to global state. They can dispatch or get state from Redux store.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+##### Actions
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In this folder you can find Redux actions that you can dispatch any action.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##### Reducers
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+In this folder you can find Redux reducers that you can update the app state.
 
-## Learn More
+##### Hooks
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+In this folder you can find our custom hooks that we are able to use in more than one place in the project. For example useWindowSize, etc.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+##### Utils
 
-### Code Splitting
+In this folder you can find our utility functions that we need in the project. To be able to maintain and developer easily, we have separated from the app logic.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+##### Api
 
-### Analyzing the Bundle Size
+In this folder you can find our fake REST Api.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+##### Services
 
-### Making a Progressive Web App
+In this folder you can find our simple api service and config. For example if you need to add token for Authorization to requests' Header, you can add in this folder and use anywhere you want.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+##### Pages
 
-### Advanced Configuration
+In this folder you can find our route pages. In this case, we have only Homepage but as the project grows, we will have lots of screen such as Category, Product Detail, Orders, etc. so we can manage all of them in this folder.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+##### Styles
 
-### Deployment
+In this folder you can find our global stylesheets.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+##### Assets
 
-### `npm run build` fails to minify
+In this folder you can find our assets such as image.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Test
+
+Unfortunately, I couldn't write any test for now. I've been interested in how to write test for a while.
+
+## Installation
+
+```sh
+git commit https://github.com/frkntplglu/getir-case-study.git
+cd getir-case-study
+npm install
+npm run api
+npm start
+```
+
+After these operations, REST Api will execute on http://localhost:3001 and React App will execute on http://localhost:3000
+
+## Live Demo
+
+## Contribution
+
+Please feel free to contribute to this project. All contributions will be welcomed. If you want to contact me you can send an email to furkantopalogluu@gmail.com
