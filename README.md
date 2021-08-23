@@ -76,7 +76,7 @@ Unfortunately, I couldn't write any test for now. I've been interested in how to
 ## Installation
 
 ```sh
-git commit https://github.com/frkntplglu/getir-case-study.git
+git clone https://github.com/frkntplglu/getir-case-study.git
 cd getir-case-study
 npm install
 npm run api
