@@ -1,8 +1,12 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Arrowleft from "../../components/Icons/Arrowleft";
+import Arrowright from "../../components/Icons/Arrowright";
 
 const PaginationWrapper = styled.div`
   margin-top: 32px;
+  display: flex;
+  justify-content: center;
 `;
 
 const PaginationButton = styled.button`
@@ -24,12 +28,31 @@ const PaginationButton = styled.button`
   }
 `;
 
-const PrevBtn = styled(PaginationButton)`
-  margin-right: 34px;
+const PrevNextBtn = styled(PaginationButton)`
+  display: inline-flex;
+  align-items: center;
+  svg path {
+    fill: #697488;
+  }
+  &:hover {
+    svg path {
+      fill: ${(props) => props.theme.colors.mainColor};
+    }
+  }
 `;
 
-const NextBtn = styled(PaginationButton)`
+const PrevBtn = styled(PrevNextBtn)`
+  margin-right: 34px;
+  svg {
+    margin-right: 13px;
+  }
+`;
+
+const NextBtn = styled(PrevNextBtn)`
   margin-left: 34px;
+  svg {
+    margin-left: 13px;
+  }
 `;
 
 function Pagination({ totalItem, itemPerPage, paginate, currentPage }) {
@@ -39,13 +62,18 @@ function Pagination({ totalItem, itemPerPage, paginate, currentPage }) {
     pageNumbers.push(i);
   }
 
+  const pageLeft = pageNumbers.slice(0, 4);
+  const pageRight = pageNumbers.slice(-4);
+
   return (
     <PaginationWrapper>
       {currentPage !== 1 ? (
-        <PrevBtn onClick={() => paginate(currentPage - 1)}>Prev</PrevBtn>
+        <PrevBtn onClick={() => paginate(currentPage - 1)}>
+          <Arrowleft /> Prev
+        </PrevBtn>
       ) : null}
 
-      {pageNumbers.map((number) => (
+      {pageLeft.map((number) => (
         <PaginationButton
           className={currentPage === number ? "active" : null}
           key={number}
@@ -54,8 +82,30 @@ function Pagination({ totalItem, itemPerPage, paginate, currentPage }) {
           {number}
         </PaginationButton>
       ))}
+      {currentPage > 4 && currentPage < pageNumbers[pageNumbers.length - 4] ? (
+        <>
+          <PaginationButton>..</PaginationButton>
+          <PaginationButton className="active">{currentPage}</PaginationButton>
+          <PaginationButton>..</PaginationButton>
+        </>
+      ) : (
+        <PaginationButton>...</PaginationButton>
+      )}
+
+      {pageRight.map((number) => (
+        <PaginationButton
+          className={currentPage === number ? "active" : null}
+          key={number}
+          onClick={() => paginate(number)}
+        >
+          {number}
+        </PaginationButton>
+      ))}
+
       {currentPage !== totalPage ? (
-        <NextBtn onClick={() => paginate(currentPage + 1)}>Next</NextBtn>
+        <NextBtn onClick={() => paginate(currentPage + 1)}>
+          Next <Arrowright />
+        </NextBtn>
       ) : null}
     </PaginationWrapper>
   );

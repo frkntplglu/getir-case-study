@@ -39,7 +39,7 @@ const ProductListInnerWrapper = styled.div`
 `;
 
 function ProductsList() {
-  const [activeItemType, setActiveItemType] = useState("");
+  const [activeItemType, setActiveItemType] = useState("mug");
   const dispatch = useDispatch();
   const { loading, currentPage, productsPerPage, filteredItems, error } =
     useSelector((state) => state.productsList);
@@ -62,8 +62,11 @@ function ProductsList() {
 
   return (
     <ProductListWrapper>
-      <ProductListTitle>Products {activeItemType}</ProductListTitle>
-      <ItemTypeFilter onChangeType={handleTypeFilter} />
+      <ProductListTitle>Products</ProductListTitle>
+      <ItemTypeFilter
+        activeItemType={activeItemType}
+        onChangeType={handleTypeFilter}
+      />
       <ProductListInnerWrapper>
         {error ? <Alert type="error">{error}</Alert> : null}
         {loading
