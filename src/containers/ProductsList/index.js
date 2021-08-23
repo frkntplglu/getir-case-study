@@ -7,8 +7,10 @@ import Alert from "../../components/UI/Alert";
 import mediaQueries from "../../styles/mediaQueries";
 import SkeletonLoader from "../../components/UI/ContentLoader";
 import handlePagination from "../../utils/handlePagination";
-import Pagination from "../Pagination";
+import ReactPaginate from "react-paginate";
 import ItemTypeFilter from "../../components/ItemTypeFilter";
+import arrowBlue from "../../assets/arrowblue.svg";
+import arrowBlack from "../../assets/arrowblack.svg";
 
 const ProductListWrapper = styled.div`
   flex-grow: 2;
@@ -38,6 +40,67 @@ const ProductListInnerWrapper = styled.div`
   }
 `;
 
+const PaginateWrapper = styled.div`
+  margin-top: 32px;
+  ul {
+    display: flex;
+    justify-content: center;
+    li a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: none;
+      min-width: 32px;
+      height: 40px;
+      border-radius: ${(props) => props.theme.commonRadius};
+      color: #697488;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      &:hover {
+        color: ${(props) => props.theme.colors.mainColor};
+      }
+    }
+    li.selected a {
+      background-color: ${(props) => props.theme.colors.mainColor};
+      color: #fff;
+    }
+    li.previous,
+    li.next {
+      display: flex;
+      align-items: center;
+      &:hover:before,
+      &:hover:after {
+        background: url(${arrowBlue});
+      }
+    }
+    li.previous {
+      margin-right: 34px;
+      &:before {
+        content: "";
+        background: url(${arrowBlack});
+        display: block;
+        width: 14px;
+        height: 14px;
+        margin-right: 13px;
+      }
+    }
+    li.next {
+      margin-left: 34px;
+      &:after {
+        content: "";
+        background: url(${arrowBlack});
+        display: block;
+        width: 14px;
+        height: 14px;
+        margin-left: 13px;
+        transform: rotate(180deg);
+      }
+    }
+  }
+`;
+
 function ProductsList() {
   const [activeItemType, setActiveItemType] = useState("mug");
   const dispatch = useDispatch();
@@ -48,12 +111,15 @@ function ProductsList() {
     item.itemType.includes(activeItemType)
   );
 
+  const totalPage = Math.ceil(currentlyDisplayedItems.length / productsPerPage);
+
   const handleTypeFilter = (type) => {
     setActiveItemType(type);
   };
 
-  const handlePaginate = (number) => {
-    dispatch(setCurrentPage(number));
+  const handlePaginate = ({ selected }) => {
+    console.log(selected);
+    dispatch(setCurrentPage(selected + 1));
   };
 
   useEffect(() => {
@@ -84,12 +150,16 @@ function ProductsList() {
               />
             ))}
       </ProductListInnerWrapper>
-      <Pagination
-        currentPage={currentPage}
-        totalItem={currentlyDisplayedItems.length}
-        itemPerPage={productsPerPage}
-        paginate={handlePaginate}
-      />
+      <PaginateWrapper>
+        <ReactPaginate
+          previousLabel="Prev"
+          nextLabel="Next"
+          pageCount={totalPage}
+          onPageChange={handlePaginate}
+          pageRangeDisplayed={5}
+          initialPage={currentPage}
+        />
+      </PaginateWrapper>
     </ProductListWrapper>
   );
 }
