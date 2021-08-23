@@ -1,7 +1,5 @@
 # Getir Frontend Case
 
-## _The Last Markdown Editor, Ever_
-
 This project is a simple product listing and shopping cart that you can filter and sort the products by using UI. You can think of this project as a MVP, it was developed as soon as possible because "Speed is our currency 😊"
 
 ## Features
