@@ -52,7 +52,7 @@ const ModalContentWrapper = styled.div``;
 const ModalButton = styled.button`
   width: 30px;
   height: 30px;
-  border-radius: 2px;
+  border-radius: ${(props) => props.theme.commonRadius};
   background-color: #ddd;
   color: ${(props) => props.theme.colors.textColor};
   position: absolute;
@@ -84,7 +84,7 @@ const ModalType = styled.span`
   background: ${(props) => props.theme.colors.mainColor};
   color: #fff;
   padding: 10px;
-  border-radius: 2px;
+  border-radius: ${(props) => props.theme.commonRadius};
   position: absolute;
   top: 40px;
   left: 25px;
@@ -119,7 +119,7 @@ const ModalAddCart = styled.button`
   color: #fff;
   font-weight: 600;
   font-size: 13px;
-  border-radius: 2px;
+  border-radius: ${(props) => props.theme.commonRadius};
   cursor: pointer;
 `;
 
@@ -135,9 +135,9 @@ function ProductDetailModal() {
       const { data } = await getirAPI.get(`/products/?slug=${slug}`);
       setProductDetail(data);
     };
-    document.querySelector("body").style.overflow = "hidden";
     getProductDetail();
 
+    document.querySelector("body").style.overflow = "hidden";
     return () => (document.querySelector("body").style.overflow = "auto");
   }, [slug]);
 
@@ -154,7 +154,6 @@ function ProductDetailModal() {
   }, [history]);
 
   const addToCart = () => {
-    console.log(productDetail[0]);
     dispatch(addItemToCart(productDetail[0]));
   };
 

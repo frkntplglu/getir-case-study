@@ -41,7 +41,7 @@ const CheckboxLabel = styled.div`
     display: block;
     width: 22px;
     height: 22px;
-    border-radius: 2px;
+    border-radius: ${(props) => props.theme.commonRadius};
     margin-right: 9px;
     box-shadow: 0px 1px 7px rgba(93, 56, 192, 0.4);
     transition: all 0.3s ease 0s;

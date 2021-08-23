@@ -7,6 +7,7 @@ const theme = {
     titleColor: "#697488",
     pageTitleColor: "#6F6F6F",
   },
+  commonRadius: "2px",
 };
 
 export default theme;

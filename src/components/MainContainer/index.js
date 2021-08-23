@@ -15,6 +15,10 @@ const MainContainer = styled.div`
     padding-left: 15px;
     padding-right: 15px;
   }
+
+  @media ${mediaQueries.tablet} {
+    margin-top: 15px;
+  }
 `;
 
 export default MainContainer;

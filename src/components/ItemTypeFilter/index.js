@@ -1,33 +1,26 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
+import ItemTypeFilterButton from "./ItemTypeFilterButton";
 
 const ItemTypeFilterWrapper = styled.div`
   display: flex;
 `;
-const ItemTypeFilterButton = styled.button`
-  background-color: #f2f0fd;
-  border-radius: 2px;
-  cursor: pointer;
-  color: ${(props) => props.theme.colors.mainColor};
-  font-size: 13px;
-  line-height: 18px;
-  font-weight: 600;
-  width: 60px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 8px;
-  &.active {
-  }
-`;
 
-function ItemTypeFilter() {
+function ItemTypeFilter({ onChangeType }) {
   return (
     <ItemTypeFilterWrapper>
-      <ItemTypeFilterButton>mug</ItemTypeFilterButton>
-      <ItemTypeFilterButton>shirt</ItemTypeFilterButton>
+      <ItemTypeFilterButton onClick={() => onChangeType("mug")}>
+        mug
+      </ItemTypeFilterButton>
+      <ItemTypeFilterButton onClick={() => onChangeType("shirt")}>
+        shirt
+      </ItemTypeFilterButton>
     </ItemTypeFilterWrapper>
   );
 }
+
+ItemTypeFilter.propTypes = {
+  onChangeType: PropTypes.func.isRequired,
+};
 
 export default ItemTypeFilter;

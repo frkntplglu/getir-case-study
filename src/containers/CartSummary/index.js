@@ -14,7 +14,7 @@ const CartSummaryWrapper = styled.div`
   width: 296px;
   flex-shrink: 0;
   border: 8px solid ${(props) => props.theme.colors.mainColor};
-  border-radius: 2px;
+  border-radius: ${(props) => props.theme.commonRadius};
   padding: 14px 16px;
   box-sizing: border-box;
   display: flex;

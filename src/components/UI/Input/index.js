@@ -9,7 +9,7 @@ const InputWrapper = styled.div`
 const InputTag = styled.input`
   width: 100%;
   border: 1px solid #e0e0e0;
-  border-radius: 2px;
+  border-radius: ${(props) => props.theme.commonRadius};
   height: 48px;
   padding-left: 15px;
   padding-right: 15px;

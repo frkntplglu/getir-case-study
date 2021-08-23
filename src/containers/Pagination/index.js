@@ -9,7 +9,7 @@ const PaginationButton = styled.button`
   background: none;
   min-width: 32px;
   height: 40px;
-  border-radius: 2px;
+  border-radius: ${(props) => props.theme.commonRadius};
   color: #697488;
   border: none;
   font-size: 16px;

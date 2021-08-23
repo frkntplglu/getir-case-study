@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const CartTotalPrice = styled.div`
   border: 2px solid currentColor;
-  border-radius: 2px;
+  border-radius: ${(props) => props.theme.commonRadius};
   font-weight: 600;
   color: ${(props) => props.theme.colors.mainColor};
   display: inline-flex;

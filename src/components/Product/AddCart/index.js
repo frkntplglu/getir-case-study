@@ -7,7 +7,7 @@ const AddCart = styled.button`
   font-weight: 600;
   height: 22px;
   width: 100%;
-  border-radius: 2px;
+  border-radius: ${(props) => props.theme.commonRadius};
   margin-top: 8px;
   cursor: pointer;
 `;

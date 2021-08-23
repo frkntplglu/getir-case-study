@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "../../components/Product";
 import { getAllProducts, setCurrentPage } from "../../actions/productsActions";
@@ -23,7 +23,7 @@ const ProductListTitle = styled.h2`
 
 const ProductListInnerWrapper = styled.div`
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: ${(props) => props.theme.commonRadius};
   box-shadow: 0px 4px 24px rgba(93, 62, 188, 0.04);
   display: grid;
   grid-template-columns: repeat(4, minmax(125px, 1fr));
@@ -39,9 +39,18 @@ const ProductListInnerWrapper = styled.div`
 `;
 
 function ProductsList() {
+  const [activeItemType, setActiveItemType] = useState("");
   const dispatch = useDispatch();
   const { loading, currentPage, productsPerPage, filteredItems, error } =
     useSelector((state) => state.productsList);
+
+  const currentlyDisplayedItems = filteredItems.filter((item) =>
+    item.itemType.includes(activeItemType)
+  );
+
+  const handleTypeFilter = (type) => {
+    setActiveItemType(type);
+  };
 
   const handlePaginate = (number) => {
     dispatch(setCurrentPage(number));
@@ -53,15 +62,15 @@ function ProductsList() {
 
   return (
     <ProductListWrapper>
-      <ProductListTitle>Products</ProductListTitle>
-      <ItemTypeFilter />
+      <ProductListTitle>Products {activeItemType}</ProductListTitle>
+      <ItemTypeFilter onChangeType={handleTypeFilter} />
       <ProductListInnerWrapper>
         {error ? <Alert type="error">{error}</Alert> : null}
         {loading
           ? Array(productsPerPage)
               .fill()
               .map((loader, index) => <SkeletonLoader key={index} />)
-          : handlePagination(filteredItems, {
+          : handlePagination(currentlyDisplayedItems, {
               currentPage,
               productsPerPage,
             }).map((product) => (
@@ -74,7 +83,7 @@ function ProductsList() {
       </ProductListInnerWrapper>
       <Pagination
         currentPage={currentPage}
-        totalItem={filteredItems.length}
+        totalItem={currentlyDisplayedItems.length}
         itemPerPage={productsPerPage}
         paginate={handlePaginate}
       />
