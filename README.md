@@ -87,6 +87,8 @@ After these operations, REST Api will execute on http://localhost:3001 and React
 
 ## Live Demo
 
+[Go Live Demo](https://getir-frontend-case.netlify.app/)
+
 ## Contribution
 
 Please feel free to contribute to this project. All contributions will be welcomed. If you want to contact me you can send an email to furkantopalogluu@gmail.com
